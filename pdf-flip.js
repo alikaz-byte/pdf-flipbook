@@ -263,13 +263,8 @@
                 var unscaledViewport = page.getViewport(1);
                 var divider = PdfFlip.layout == 'double' ? 2 : 1;
 
-                var scale = Math.min((($('#mainContainer').height() - 20) / unscaledViewport.height), ((($('#mainContainer').width() - 80) / divider) / unscaledViewport.width));
-
-                var viewport = page.getViewport(scale);
-
-
-                if (PdfFlip.currentScale > 1)
-                    viewport = page.getViewport(PdfFlip.currentScale);
+                var fixedScale = 2.5;
+var viewport = page.getViewport({ scale: fixedScale });
 
                 destinationCanvas.height = viewport.height; // - ((viewport.height / 100) * 10);
                 destinationCanvas.width = viewport.width; // - ((viewport.width / 100) * 10);
