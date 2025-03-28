@@ -263,17 +263,19 @@
                 var unscaledViewport = page.getViewport(1);
                 var divider = PdfFlip.layout == 'double' ? 2 : 1;
 
-                var fixedScale = 5;
+               var fixedScale = 5;
 var viewport = page.getViewport({ scale: fixedScale });
 
-                destinationCanvas.height = viewport.height; // - ((viewport.height / 100) * 10);
-                destinationCanvas.width = viewport.width; // - ((viewport.width / 100) * 10);
+destinationCanvas.height = viewport.height;
+destinationCanvas.width = viewport.width;
 
+var ctx = destinationCanvas.getContext("2d");
+ctx.imageSmoothingEnabled = false; // ✅ Disable smoothing for sharper lines
 
-                var renderContext = {
-                    canvasContext: destinationCanvas.getContext("2d"),
-                    viewport: viewport
-                };
+var renderContext = {
+    canvasContext: ctx,
+    viewport: viewport
+};
 
                 page.render(renderContext).promise.then(function () {
                     pagesRendered++;
